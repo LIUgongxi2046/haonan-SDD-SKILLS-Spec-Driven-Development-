@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S005-3 Agent LLD"
+  short_description: "Agent 状态、工具权限、预算终止与评测治理设计"
+  default_prompt: "Use $haonan-s005-3-lld-agent to 设计可授权、可终止、可评测的 Agent 与工具治理契约。"
+
+policy:
+  allow_implicit_invocation: false

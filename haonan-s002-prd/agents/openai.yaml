@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S002 PRD"
+  short_description: "可追溯需求、业务流程、状态权限、验收契约与质量审查"
+  default_prompt: "Use $haonan-s002-prd to 把这些材料整理成带稳定 ID、验收标准和追溯矩阵的 PRD。"
+
+policy:
+  allow_implicit_invocation: false

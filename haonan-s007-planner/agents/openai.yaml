@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S007 实施拆解"
+  short_description: "纵向切片、任务 DAG、并行批次、质量门禁与回滚管理"
+  default_prompt: "Use $haonan-s007-planner to 将当前设计拆成可独立实施、验证和回滚的任务 DAG。"
+
+policy:
+  allow_implicit_invocation: false

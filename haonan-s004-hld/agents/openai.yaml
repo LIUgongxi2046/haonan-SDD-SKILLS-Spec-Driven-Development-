@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S004 HLD"
+  short_description: "系统边界、架构决策、NFR、容量成本、风险与演进路线"
+  default_prompt: "Use $haonan-s004-hld to 把需求转化为最简可演进的高层架构、ADR 和 S005 交接契约。"
+
+policy:
+  allow_implicit_invocation: false

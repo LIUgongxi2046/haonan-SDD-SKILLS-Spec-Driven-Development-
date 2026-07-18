@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S005-4 前端 LLD"
+  short_description: "组件路由、状态契约、流式交互、前端质量与发布门禁治理"
+  default_prompt: "Use $haonan-s005-4-lld-front to 把 PRD、UI 和 API 收口为可实现的前端详细设计。"
+
+policy:
+  allow_implicit_invocation: false

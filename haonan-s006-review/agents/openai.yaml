@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S006 技术评审"
+  short_description: "跨资产契约审查、风险分级、设计发布门禁与证据结论意见"
+  default_prompt: "Use $haonan-s006-review to 审查这些研发资产的契约错位、证据缺口和发布阻断项。"
+
+policy:
+  allow_implicit_invocation: false

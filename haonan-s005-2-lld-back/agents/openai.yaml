@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S005-2 后端 LLD"
+  short_description: "服务边界、API、事务异步、权限、可观测性与验收契约"
+  default_prompt: "Use $haonan-s005-2-lld-back to 设计当前系统的后端模块、接口、失败语义和验收契约。"
+
+policy:
+  allow_implicit_invocation: false

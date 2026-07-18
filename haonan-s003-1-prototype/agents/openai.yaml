@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S003-1 产品原型"
+  short_description: "信息架构、页面地图、交互流程、原型验收与交付审查机制"
+  default_prompt: "Use $haonan-s003-1-prototype to 基于当前 PRD 生成页面地图、核心流程和可验证的原型规格。"
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S011 部署与运维"
+  short_description: "部署档位、CI/CD、迁移回滚、监控运维与发布门禁"
+  default_prompt: "Use $haonan-s011-devops to 为当前代码选择并实现最合适的部署、发布和回滚方案。"
+
+policy:
+  allow_implicit_invocation: false

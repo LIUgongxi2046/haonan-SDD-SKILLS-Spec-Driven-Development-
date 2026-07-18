@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S010 安全工程"
+  short_description: "威胁建模、安全评估、授权测试、残余风险与修复规划建议"
+  default_prompt: "Use $haonan-s010-safety to 对当前系统做限定范围的威胁建模与安全证据评估。"
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S012 技术文档"
+  short_description: "基于真实代码的文档包生成、漂移检查、交付索引与审计"
+  default_prompt: "Use $haonan-s012-docs to 从当前代码与研发资产生成可校验的技术文档交付包。"
+
+policy:
+  allow_implicit_invocation: false

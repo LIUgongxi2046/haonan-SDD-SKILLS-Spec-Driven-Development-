@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S000 研发编排"
+  short_description: "研发阶段判断、最短路径路由、依赖门禁与交接编排管理"
+  default_prompt: "Use $haonan-s000-pmp to 判断当前研发阶段，并给出最小可执行的 Skill 路由与依赖计划。"
+
+policy:
+  allow_implicit_invocation: true

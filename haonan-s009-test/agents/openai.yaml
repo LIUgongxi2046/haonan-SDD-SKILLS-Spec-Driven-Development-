@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S009 测试与 Evals"
+  short_description: "测试规划、自动化实现、AI Evals 执行与证据报告"
+  default_prompt: "Use $haonan-s009-test to 为当前需求设计并执行风险驱动的测试与 AI Evals。"
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S001 产品战略"
+  short_description: "目标用户、市场竞争、商业模式、关键实验与落地决策建议"
+  default_prompt: "Use $haonan-s001-ceo-strategy to 评估这个产品想法的战略价值、商业假设和验证实验。"
+
+policy:
+  allow_implicit_invocation: false

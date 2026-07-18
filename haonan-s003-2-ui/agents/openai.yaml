@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S003-2 UI 设计"
+  short_description: "高保真视觉系统、全页面状态、真实资产与切图交付规范"
+  default_prompt: "Use $haonan-s003-2-ui to 将当前 PRD 或原型整理为完整的高保真 UI 与资产交付包。"
+
+policy:
+  allow_implicit_invocation: false

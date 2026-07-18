@@ -1,0 +1,7 @@
+interface:
+  display_name: "Haonan S008 代码实现"
+  short_description: "按工单增量实现、风险测试、真实验证、变更交付与回滚"
+  default_prompt: "Use $haonan-s008-coder to 在当前仓库完成这个任务，并运行与 DoD 对应的真实验证。"
+
+policy:
+  allow_implicit_invocation: false
