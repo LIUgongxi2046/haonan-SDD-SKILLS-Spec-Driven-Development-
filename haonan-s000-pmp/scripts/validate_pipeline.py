@@ -37,6 +37,28 @@ DISALLOWED_TEXT = (
     "url: [http",
 )
 
+REQUIRED_RELEASE_STATES = (
+    "LOCAL_CHANGED",
+    "LOCAL_VERIFIED",
+    "GIT_COMMITTED",
+    "GIT_PUSHED",
+    "PROD_DEPLOYED",
+    "PROD_VERIFIED",
+    "ROLLED_BACK",
+    "DB_BACKED_UP",
+    "DB_MIGRATED",
+    "DB_VERIFIED",
+    "DB_ROLLED_BACK",
+    "WEB_BUILT",
+    "WEB_DEPLOYED",
+    "WEB_VERIFIED",
+    "MP_BUILT",
+    "MP_PREVIEW_VERIFIED",
+    "MP_UPLOADED",
+    "REVIEW_SUBMITTED",
+    "RELEASED",
+)
+
 
 def parse_frontmatter(text: str) -> tuple[dict[str, str], str] | None:
     if not text.startswith("---\n"):
@@ -124,6 +146,15 @@ def validate(root: Path) -> dict[str, object]:
         for name in EXPECTED[1:]:
             if f"${name}" not in router_text:
                 errors.append(f"haonan-s000-pmp: route table missing ${name}")
+
+    release_contract = root / "haonan-s000-pmp" / "references" / "release-state-contract.md"
+    if not release_contract.is_file():
+        errors.append("haonan-s000-pmp: missing release-state-contract.md")
+    else:
+        release_text = release_contract.read_text(encoding="utf-8")
+        for state in REQUIRED_RELEASE_STATES:
+            if f"`{state}`" not in release_text:
+                errors.append(f"release-state-contract.md: missing release state {state}")
 
     unexpected = sorted(
         path.name for path in root.glob("haonan-s0*") if path.is_dir() and path.name not in EXPECTED

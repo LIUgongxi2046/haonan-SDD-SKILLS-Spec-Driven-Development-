@@ -36,6 +36,7 @@ description: 跨产品、架构与实现的技术评审技能。Use when Codex n
 - UI ↔ Frontend：Token、组件、资产、响应式和可访问性。
 - 代码 ↔ 设计：实现偏差、兼容、迁移和技术债。
 - 测试/安全/部署 ↔ 发布标准：证据、残余风险和回滚能力。
+- 发布账本 ↔ 真实环境：commit、构建物校验和、数据库版本、配置变量、部署目标、客户端上传与审核状态。
 
 详细矩阵见 `references/review-matrix.md`。
 
@@ -45,7 +46,8 @@ description: 跨产品、架构与实现的技术评审技能。Use when Codex n
 2. 比较字段、状态、错误、时序、权限和 NFR；区分差异与真实冲突。
 3. 评估影响、发生条件、可检测性、修复成本和发布后果。
 4. 分级问题并给出最小修复动作、责任 Skill、验收证据和截止门禁。
-5. 复核修复后关闭问题；未复核只标记 `CREATED` 或 `OBSERVED`，不标记 `VERIFIED`。
+5. `RELEASE_GATE` 按 [../haonan-s000-pmp/references/release-state-contract.md](../haonan-s000-pmp/references/release-state-contract.md) 核对每个发布面；任一版本不一致时不得给全局 `GO`。
+6. 复核修复后关闭问题；未复核只标记 `CREATED` 或 `OBSERVED`，不标记 `VERIFIED`。
 
 ## 严重性与决议
 
@@ -59,6 +61,8 @@ description: 跨产品、架构与实现的技术评审技能。Use when Codex n
 `RELEASE_GATE` 结论：`GO`、`CONDITIONAL_GO`、`NO_GO`、`INSUFFICIENT_EVIDENCE`。
 
 只有审查范围足够且证据真实时才给全局结论。
+
+发布门禁至少要求：候选 commit 冻结、工作区范围清楚、受影响测试通过、构建物可追溯、秘密扫描完成、数据迁移/备份已演练或不适用、生产 smoke 与回滚步骤明确。小程序等客户端还需单列预览、真机、质量扫描、上传和审核状态。
 
 ## 输出
 
