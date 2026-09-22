@@ -1,187 +1,101 @@
-#!/usr/bin/env python3
-"""Audit a haonan-s003-2-ui delivery package using only the standard library."""
-
-from __future__ import annotations
-
 import argparse
 import csv
 import json
-import tempfile
 from pathlib import Path
 
-
-BASE_REQUIRED = (
-    "assumptions-and-open-questions.md",
-    "design-system.md",
-    "tokens.json",
-    "asset-manifest.csv",
-    "page-asset-map.csv",
-    "ui-audit.md",
-)
-
-MAP_HEADERS = {"source_id", "screen_id", "name", "source_type", "status", "artifact_path"}
-ASSET_HEADERS = {
-    "asset_id",
-    "file_path",
-    "usage",
-    "width",
-    "height",
-    "format",
-    "transparency",
-    "source",
-}
-PAGE_ASSET_HEADERS = {"screen_id", "asset_id", "usage"}
+from PIL import Image
 
 
-def read_csv(path: Path, required_headers: set[str], errors: list[str]) -> list[dict[str, str]]:
-    try:
-        with path.open(newline="", encoding="utf-8-sig") as handle:
-            reader = csv.DictReader(handle)
-            headers = set(reader.fieldnames or [])
-            missing = sorted(required_headers - headers)
-            if missing:
-                errors.append(f"{path.name}: missing headers: {', '.join(missing)}")
-            return list(reader)
-    except (OSError, csv.Error) as exc:
-        errors.append(f"{path.name}: cannot read CSV: {exc}")
-        return []
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
 
 
-def resolve_relative(root: Path, raw: str) -> Path | None:
-    value = raw.strip()
-    if not value:
-        return None
-    candidate = (root / value).resolve()
-    try:
-        candidate.relative_to(root.resolve())
-    except ValueError:
-        return None
-    return candidate
+def resolve_file(root, value, source_roots=()):
+    require(bool(value.strip()), "清单路径不能为空")
+    path = (root / value).resolve(strict=True)
+    require(path.is_file() and any(path.is_relative_to(directory) for directory in (root, *source_roots)), f"清单文件需要位于交付目录或明确指定的来源目录：{value}")
+    return path
 
 
-def audit(root: Path) -> dict[str, object]:
-    errors: list[str] = []
-    warnings: list[str] = []
-
-    if not root.is_dir():
-        return {"ok": False, "errors": [f"Delivery root is not a directory: {root}"], "warnings": []}
-
-    for name in BASE_REQUIRED:
-        if not (root / name).is_file():
-            errors.append(f"Missing required file: {name}")
-
-    map_candidates = [root / "route-design-map.csv", root / "screen-design-map.csv"]
-    map_path = next((path for path in map_candidates if path.is_file()), None)
-    if map_path is None:
-        errors.append("Missing route-design-map.csv or screen-design-map.csv")
-        map_rows: list[dict[str, str]] = []
-    else:
-        map_rows = read_csv(map_path, MAP_HEADERS, errors)
-
-    tokens_path = root / "tokens.json"
-    if tokens_path.is_file():
-        try:
-            tokens = json.loads(tokens_path.read_text(encoding="utf-8"))
-            if not isinstance(tokens, dict) or not tokens:
-                errors.append("tokens.json: expected a non-empty JSON object")
-        except (OSError, json.JSONDecodeError) as exc:
-            errors.append(f"tokens.json: invalid JSON: {exc}")
-
-    asset_rows = []
-    asset_path = root / "asset-manifest.csv"
-    if asset_path.is_file():
-        asset_rows = read_csv(asset_path, ASSET_HEADERS, errors)
-
-    page_asset_rows = []
-    page_asset_path = root / "page-asset-map.csv"
-    if page_asset_path.is_file():
-        page_asset_rows = read_csv(page_asset_path, PAGE_ASSET_HEADERS, errors)
-
-    complete_statuses = {"CREATED", "VERIFIED"}
-    for index, row in enumerate(map_rows, start=2):
-        status = (row.get("status") or "").strip().upper()
-        artifact = resolve_relative(root, row.get("artifact_path") or "")
-        if status in complete_statuses and artifact is None:
-            errors.append(f"{map_path.name}:{index}: completed screen has no safe artifact_path")
-        elif artifact is not None and not artifact.exists():
-            errors.append(f"{map_path.name}:{index}: artifact not found: {row.get('artifact_path')}")
-
-    asset_ids: set[str] = set()
-    for index, row in enumerate(asset_rows, start=2):
-        asset_id = (row.get("asset_id") or "").strip()
-        if not asset_id:
-            errors.append(f"asset-manifest.csv:{index}: empty asset_id")
-        elif asset_id in asset_ids:
-            errors.append(f"asset-manifest.csv:{index}: duplicate asset_id: {asset_id}")
-        asset_ids.add(asset_id)
-
-        asset_file = resolve_relative(root, row.get("file_path") or "")
-        if asset_file is None:
-            errors.append(f"asset-manifest.csv:{index}: empty or unsafe file_path")
-        elif not asset_file.is_file():
-            errors.append(f"asset-manifest.csv:{index}: file not found: {row.get('file_path')}")
-
-    for index, row in enumerate(page_asset_rows, start=2):
-        asset_id = (row.get("asset_id") or "").strip()
-        if asset_id and asset_id not in asset_ids:
-            errors.append(f"page-asset-map.csv:{index}: unknown asset_id: {asset_id}")
-
-    if not map_rows:
-        warnings.append("Screen map has no data rows")
-    if not asset_rows:
-        warnings.append("Asset manifest has no data rows")
-
-    return {
-        "ok": not errors,
-        "root": str(root.resolve()),
-        "screens": len(map_rows),
-        "assets": len(asset_rows),
-        "page_asset_links": len(page_asset_rows),
-        "errors": errors,
-        "warnings": warnings,
-    }
+def read_csv(path, columns):
+    with path.open(newline="", encoding="utf-8-sig") as stream:
+        reader = csv.DictReader(stream)
+        require(columns <= set(reader.fieldnames or []), f"CSV 缺少必要字段：{path.name}")
+        rows = list(reader)
+    require(all(None not in row and all(value is not None for value in row.values()) for row in rows), f"CSV 列数不一致：{path.name}")
+    return rows
 
 
-def write_self_test_fixture(root: Path) -> None:
-    (root / "screens").mkdir()
-    (root / "assets").mkdir()
-    (root / "screens" / "home.png").write_bytes(b"test")
-    (root / "assets" / "hero.png").write_bytes(b"test")
-    for name in ("assumptions-and-open-questions.md", "design-system.md", "ui-audit.md"):
-        (root / name).write_text("# Test\n", encoding="utf-8")
-    (root / "tokens.json").write_text('{"color":{"brand":{"primary":"#123456"}}}', encoding="utf-8")
-    (root / "screen-design-map.csv").write_text(
-        "source_id,screen_id,name,source_type,status,artifact_path\nP-1,home,Home,EXPLICIT,VERIFIED,screens/home.png\n",
-        encoding="utf-8",
-    )
-    (root / "asset-manifest.csv").write_text(
-        "asset_id,file_path,usage,width,height,format,transparency,source\nhero,assets/hero.png,hero,100,100,png,true,generated\n",
-        encoding="utf-8",
-    )
-    (root / "page-asset-map.csv").write_text(
-        "screen_id,asset_id,usage\nhome,hero,hero\n", encoding="utf-8"
-    )
+def unique(rows, key):
+    values = [row[key].strip() for row in rows]
+    require(all(values) and len(values) == len(set(values)), f"清单存在重复或空 ID：{key}")
+    return set(values)
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("delivery_root", nargs="?", type=Path)
-    parser.add_argument("--self-test", action="store_true")
+def audit(root, mode="design", require_generated=False, source_roots=()):
+    root = root.resolve(strict=True)
+    require(root.is_dir(), "交付位置必须是目录")
+    source_roots = tuple(path.resolve(strict=True) for path in source_roots)
+    require(all(path.is_dir() for path in source_roots), "来源位置必须是实际目录")
+    required = ["ui-audit.md"]
+    if mode == "design":
+        required += ["design-system.md", "tokens.json"]
+    for name in required:
+        resolve_file(root, name)
+    maps = [root / name for name in ("route-design-map.csv", "screen-design-map.csv") if (root / name).exists()]
+    require(len(maps) == 1, "需要一份明确的页面或屏幕映射")
+    rows = read_csv(maps[0], {"source_id", "screen_id", "name", "source_type", "status", "artifact_path"})
+    require(bool(rows), "屏幕映射不能为空")
+    screens = unique(rows, "screen_id")
+    for row in rows:
+        require(row["source_id"].strip() and row["name"].strip(), "屏幕来源与名称不能为空")
+        require(row["source_type"] in {"EXPLICIT", "INFERRED", "UNKNOWN"}, "屏幕来源类型无效")
+        require(row["status"] in {"PLANNED", "CREATED", "OBSERVED", "VERIFIED", "BLOCKED", "NOT_APPLICABLE"}, "屏幕产物状态无效")
+        if row["status"] in {"CREATED", "OBSERVED", "VERIFIED"}:
+            resolve_file(root, row["artifact_path"], source_roots)
+    token_path = root / "tokens.json"
+    if token_path.exists():
+        tokens = json.loads(token_path.read_text())
+        require(isinstance(tokens, dict) and bool(tokens), "Token 必须是非空 JSON 对象")
+    assets_path = root / "asset-manifest.csv"
+    assets = read_csv(assets_path, {"asset_id", "file_path", "usage", "width", "height", "format", "transparency", "source"}) if assets_path.exists() else []
+    asset_ids = unique(assets, "asset_id")
+    for row in assets:
+        path = resolve_file(root, row["file_path"], source_roots)
+        require(row["source"].strip() and row["usage"].strip(), "资产需要真实来源和用途")
+        if path.suffix.lower() in {".png", ".webp", ".jpg", ".jpeg", ".gif"}:
+            with Image.open(path) as picture:
+                require(picture.size == (int(row["width"]), int(row["height"])), f"图片尺寸与清单不一致：{row['asset_id']}")
+                require(picture.format.lower() == row["format"].lower().replace("jpg", "jpeg"), f"图片格式与清单不一致：{row['asset_id']}")
+                picture.verify()
+    map_path = root / "page-asset-map.csv"
+    links = read_csv(map_path, {"screen_id", "asset_id", "usage"}) if map_path.exists() else []
+    require(not assets or bool(links), "存在资产时需要页面引用清单")
+    for row in links:
+        require(row["screen_id"] in screens and row["asset_id"] in asset_ids, "页面资产引用的 ID 不存在")
+    generation_path = root / "image-generation-manifest.csv"
+    generations = read_csv(generation_path, {"asset_id", "generation_tool", "prompt_summary", "source_image_path", "output_file_path"}) if generation_path.exists() else []
+    unique(generations, "asset_id")
+    require(not require_generated or bool(generations), "本次要求生成资产，但缺少来源记录")
+    for row in generations:
+        require(row["asset_id"] in asset_ids and row["generation_tool"].strip() and row["prompt_summary"].strip(), "生成资产记录不完整")
+        for field in ("source_image_path", "output_file_path"):
+            path = resolve_file(root, row[field], source_roots)
+            with Image.open(path) as picture:
+                picture.verify()
+    return {"valid": True, "evidence_kind": "STRUCTURE", "mode": mode, "screens": len(rows), "assets": len(assets), "generated_assets": len(generations), "interaction_verified": False, "visual_verified": False}
+
+
+def main():
+    parser = argparse.ArgumentParser(description="核对 UI 交付范围、实际文件、引用和图片格式")
+    parser.add_argument("delivery_root", type=Path)
+    parser.add_argument("--mode", choices=["design", "audit", "implementation"], default="design")
+    parser.add_argument("--require-generated", action="store_true")
+    parser.add_argument("--source-root", type=Path, action="append", default=[])
     args = parser.parse_args()
-
-    if args.self_test:
-        with tempfile.TemporaryDirectory(prefix="haonan-ui-audit-") as temp_dir:
-            root = Path(temp_dir)
-            write_self_test_fixture(root)
-            result = audit(root)
-    elif args.delivery_root is not None:
-        result = audit(args.delivery_root)
-    else:
-        parser.error("delivery_root is required unless --self-test is used")
-
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 1
+    print(json.dumps(audit(args.delivery_root, args.mode, args.require_generated, args.source_root), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

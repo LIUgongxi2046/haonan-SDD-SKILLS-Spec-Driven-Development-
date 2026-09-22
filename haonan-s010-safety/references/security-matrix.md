@@ -36,3 +36,5 @@ finding_id,evidence,reproduction,impact,likelihood,severity,control_gap,remediat
 ```
 
 Payload 使用最小无害样本，真实攻击执行遵守授权范围和停止条件。
+
+每项控制记录需求或风险来源、适用环境、合法操作路径与拒绝路径。附加审核和发布条件有依据，不能通过阻断全部操作取得通过。身份在请求、异步结果、跳转及采用时一致。

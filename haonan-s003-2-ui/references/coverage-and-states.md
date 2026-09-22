@@ -2,7 +2,7 @@
 
 ## 1. 页面盘点
 
-代码模式从以下位置交叉取数：
+现状审查从以下位置交叉取数；目标页面集合同时保留用户批准但尚未实现的页面：
 
 - 路由配置、文件系统路由和动态路由参数。
 - 一级/二级导航、快捷入口和深链。
@@ -20,7 +20,7 @@ source_id,screen_id,name,source_type,requirement_refs,status,required_states,art
 ```
 
 - `source_type`：`EXPLICIT`、`INFERRED`、`UNKNOWN`。
-- `status`：`PLANNED`、`CREATED`、`VERIFIED`、`BLOCKED`、`NOT_APPLICABLE`。
+- `status`：`PLANNED`、`CREATED`、`OBSERVED`、`VERIFIED`、`BLOCKED`、`NOT_APPLICABLE`。这些状态描述页面产物，与任务和业务验收状态分别记录；`OBSERVED` 仅表示已读取现有产物。
 - `requirement_refs`：PRD、路由或原型屏幕的可追溯编号。
 
 ## 3. 状态族
@@ -51,6 +51,6 @@ source_id,screen_id,name,source_type,requirement_refs,status,required_states,art
 
 - 页面覆盖率 = 已创建必需页面 / 必需页面总数。
 - 状态覆盖率 = 已创建适用状态 / 适用状态总数。
-- 验证覆盖率 = 已验证产物 / 已创建产物。
+- 验证覆盖率 = 已完成要求验证的必需页面和状态 / 全部必需页面和状态。
 
 分别报告，不合并成一个模糊百分比。任何 `BLOCKED` 项单列原因和解除条件。

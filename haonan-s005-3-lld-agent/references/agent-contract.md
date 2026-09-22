@@ -1,4 +1,4 @@
-# Agent LLD 契约字段
+# Agent LLD 规范字段
 
 ## Agent 注册表
 
@@ -13,6 +13,12 @@ tool_id,purpose,input_schema,output_schema,permission,side_effect,idempotency,ti
 ```
 
 工具错误应稳定、可恢复且不泄露敏感实现细节。
+
+## 能力与采用
+
+每项能力记录 `requirement_id,entry,provider,model,prompt_version,tool_adapter,knowledge_version,context_identity,output,adoption,business_result,acceptance_id`。
+目录登记、连接、执行、效果评测和业务采用分别验证。配置发布必须说明运行时读取来源及版本。
+`HOSTED_API` 验证真实 API 请求与数据范围；`SELF_HOSTED` 增加制品、引擎和资源要求。适用门槛具有需求或风险依据。
 
 ## 状态机
 

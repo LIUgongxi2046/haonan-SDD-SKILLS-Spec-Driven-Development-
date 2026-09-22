@@ -60,13 +60,19 @@ S000 → [S001] → S002 → S003-1 → [S003-2] → S004
 
 ## 目录与校验
 
-每个 Skill 目录至少包含 `SKILL.md`；部分 Skill 还带有 `references/`、`scripts/` 或 `agents/openai.yaml`。修改本系列后，可运行：
+每个 Skill 目录至少包含 `SKILL.md`；部分 Skill 还带有 `references/`、`scripts/` 或 `agents/openai.yaml`。修改本系列后，可运行交付记录校验：
 
 ```bash
-python3 haonan-s000-pmp/scripts/validate_pipeline.py .
+python3 haonan-s000-pmp/scripts/validate_delivery.py /absolute/path/to/delivery-ledger.json
 ```
 
-该脚本检查目录清单、前置元数据、相对资源链接、界面元数据、跨 Skill 名称引用和发布状态契约。
+执行检查并保存退出码、输入和产物校验和：
+
+```bash
+python3 haonan-s000-pmp/scripts/capture_check.py --help
+```
+
+交付记录校验需求、验收、任务、依赖、持续待办和执行证据；它不能替代 S006 的范围审查或 S009 的业务结果核对。
 
 ## 使用边界
 

@@ -1,4 +1,4 @@
-# 数据 LLD 契约字段
+# 数据 LLD 规范字段
 
 ## 数据源登记
 
@@ -27,13 +27,19 @@ entity,field,type,nullable,identifier,uniqueness,description,classification,sour
 stage,input,output,validation,idempotency,failure_state,retry,quarantine,observability,owner
 ```
 
-## RAG/检索契约
+## RAG/检索规范
 
 - 文档与 chunk 稳定 ID、版本、页码/坐标和来源许可。
 - 分块策略、重叠、语言/表格/图片处理和评测方法。
 - metadata 过滤、权限/租户条件、召回/重排输出和置信信号。
 - 引用回查、源文档更新、删除传播和缓存失效。
 - 黄金集版本、样本分层、人工标注和回归门禁。
+- 审核、发布、索引和业务引用关联实际版本，知识更新与删除在使用方可验证。
+
+## 业务使用与连续性
+
+记录 `producer,consumer,read_trigger,effective_version,invalidation,business_result,acceptance_id`。
+迁移与更名核对实际数据库位置、Schema、内容、关联及业务读取；行数相同不能独立证明内容一致。
 
 ## 数据质量
 
