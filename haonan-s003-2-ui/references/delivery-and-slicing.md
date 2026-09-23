@@ -27,3 +27,22 @@
 `audit_ui_delivery.py /absolute/delivery --mode design` 校验完整设计结构；`--mode audit` 或 `--mode implementation` 校验对应模式。`--source-root /absolute/project/path` 可以重复提供，清单引用文件必须处于交付目录或这些目录中；审查报告和本次必需清单仍位于交付目录。只有任务要求生成图片时使用 `--require-generated`。
 
 校验器检查文件、CSV/JSON、路径、引用及实际图片格式和尺寸，不进行视觉识别，不证明业务交互。执行证据与未执行检查分别报告。
+
+## 完整设计的目录与导出规格
+
+| 路径 | 内容 |
+|---|---|
+| `screens/` | 全部必需页面稿与页面映射 |
+| `states/` | 核心页面的加载、空、错误、确认、反馈与完成状态 |
+| `assets/master/` | 高分辨率源资产及可编辑来源 |
+| `assets/1x/`、`assets/2x/` | 从同一 Master 导出的目标尺寸 |
+| `assets/previews/` | 获准生成的资产预览 |
+| `assumptions-and-open-questions.md` | 来源、假设、未知项及用户决定 |
+
+- IP、图标与装饰根据透明度要求导出 PNG/WebP；背景与摄影根据质量、体积选择 WebP/JPG，保留源文件。
+- 目标端需要时提供 3x，所有尺寸从同一 Master 导出，不能分别生成造成角色或构图差异。
+- 名称采用 `<module>-<purpose>-<state>@<scale>.<ext>`，例如 `profile-empty-history@1x.png`。记录用途、尺寸、格式、透明度及使用页面。
+- 资产清单增加 `license_or_restriction`；页面引用增加 `required,notes`。源文件与导出文件通过同一 `asset_id` 关联。
+- 生成资产记录实际工具及提示词摘要；第三方或已有资产保留真实来源和使用限制，不要求重新生成。
+- 按端、模块或资产类型分包，每个压缩包可独立解压，包含版本与清单；全部包的文件总量、校验和及清单覆盖需要实际检查。
+- 可阅读 PDF、Markdown、JSON Token、CSV 清单与源资产各有用途，完整交付保留可维护来源。用户要求 Figma 时提供可编辑组件、变量及页面层级；未创建时准确标记。
