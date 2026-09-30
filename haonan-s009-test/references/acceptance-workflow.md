@@ -1,17 +1,4 @@
----
-name: haonan-s009-test
-description: 从批准需求建立独立业务验收范围，编写并运行工程测试和 AI Evals，核查实际结果、环境与证据。用于功能完整性、缺陷回归、跨模块流程、可靠性和测试报告。
----
-
-# Haonan S009 测试与业务验收
-
-## 模式
-
-- `PLAN`：需求与风险覆盖、验收动作、测试数据和门槛。
-- `IMPLEMENT`：按授权创建或更新测试与测试配置。
-- `EXECUTE`：执行检查，保留原始结果和环境身份。
-- `ACCEPTANCE`：检查全部承诺动作和跨模块结果是否满足。
-- `REPORT`：根据已读取的真实结果报告证据范围。
+# 业务验收与证据审查流程
 
 按请求组合模式，继承用户已有开发和验证授权。只读测试评估保持只读；已授权修复工作中的失败返回 S008 并持续复验。
 
@@ -19,7 +6,7 @@ description: 从批准需求建立独立业务验收范围，编写并运行工�
 
 从最新用户决定、批准 PRD/AC、确认设计和缺陷复现建立分母。现有 routes、API、组件和测试辅助定位实现，缺少实现的需求仍保留为未验收。预期结果引用业务依据，不能从实现当前返回值直接生成。
 
-读取 [测试矩阵](references/test-matrix.md) 和跨会话使用的 [交付记录](../haonan-s000-pmp/references/delivery-ledger.md)。平台、角色、允许的模拟范围及视觉工具权限继承用户要求；条件专项见 [平台回归](references/project-specific-regression.md)。
+读取 [测试矩阵](test-matrix.md) 和跨会话使用的 [交付记录](../../haonan-s000-pmp/references/delivery-ledger.md)。平台、角色、允许的模拟范围及视觉工具权限继承用户要求；条件专项见 [平台回归](project-specific-regression.md)。
 
 ## 证据类型
 

@@ -8,6 +8,9 @@ doc_id,audience,path,purpose,source_of_truth,version_or_commit,generation,owner,
 
 ## 开发者文档
 
+- 每项 S008 任务的独立 Markdown 开发记录、唯一索引条目与有效性信息，见 [开发记录规则](../../haonan-s000-pmp/references/task-development-records.md)。
+- 业务概念、接口实体、架构及开发记录的检索关系，见 [项目知识维护](project-knowledge.md)。
+
 - README/快速开始、环境与命令。
 - 架构上下文、ADR 和模块边界。
 - OpenAPI/事件/Schema、认证、错误、配额和示例。

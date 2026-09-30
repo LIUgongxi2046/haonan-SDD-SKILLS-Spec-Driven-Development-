@@ -26,6 +26,8 @@ tool_id,purpose,input_schema,output_schema,permission,side_effect,idempotency,ti
 
 每条转换记录：事件、守卫条件、动作、预算消耗、验证器、失败去向。
 
+涉及后端任务时，节点状态映射到后端定义的任务 ID、事件和终态，明确取消传播、超时、重复请求与结果采用条件。后端任务管理与 Agent 内部编排按 [设计责任](../../haonan-s000-pmp/references/design-ownership.md) 维护各自规范；S006 使用 [状态与分支检查](../../haonan-s006-review/references/change-review.md) 核查边界，S009 验证结果进入实际业务的路径。
+
 ## 上下文与记忆
 
 - 固定规则、任务输入、检索证据、工具结果、对话历史分层。

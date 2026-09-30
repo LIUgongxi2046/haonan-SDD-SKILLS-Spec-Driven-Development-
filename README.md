@@ -50,13 +50,28 @@ S000 → [S001] → S002 → S003-1 → [S003-2] → S004
 3. 只有在字段、权限、状态与错误契约明确后，再让 S005 的分支并行细化。
 4. 编码前运行 S006 设计评审；发布前再运行一次 S006，核对测试、安全、迁移和回滚证据。
 
-## 发布状态
+## 逐任务开发记录与项目知识
+
+每项 S008 功能开发、缺陷修复和重构任务，在项目中维护一份独立 Markdown。沿用项目既有目录，没有约定时使用 `docs/development/` 及其 `index.md`。任务开始建立记录，实施过程中更新，验收完成前核查正文、索引、代码版本及真实证据。
+
+S007 指定任务 ID 和记录路径；S008 编写并更新索引；S009 在测试与 Debug 前读取并核实；S006 检查完整性；S012 维护关联知识和有效性。后续功能开发必须检索相关记录并核查当前代码。索引负责检索，任务和验收状态继续引用唯一当前记录。
+
+- [开发记录与检索规则](haonan-s000-pmp/references/task-development-records.md)
+- [开发记录模板](haonan-s008-coder/references/development-record-template.md)
+- [条件评审与跨文件检查](haonan-s006-review/references/change-review.md)
+- [浏览器 E2E 操作规范](haonan-s009-test/references/browser-e2e.md)
+- [项目知识维护](haonan-s012-docs/references/project-knowledge.md)
+- [决策状态与影响](haonan-s000-pmp/references/decision-register.md)
+- [组织职责与原型变化](haonan-s002-prd/references/organization-and-prototype.md)
+- [设计维护责任](haonan-s000-pmp/references/design-ownership.md)
+
+## 发布状态与验收
 
 跨环境任务使用 S000 的发布状态契约，分别记录源码、Git、服务端、数据库、H5/后台和小程序。`GIT_PUSHED` 不代表生产已部署，`PROD_VERIFIED` 不代表小程序已上传，提交审核也不代表正式发布。
 
 默认在本机完成集中修复和完整回归，冻结候选 commit 后再经过 S006 发布门禁和 S011 受控部署。每次发布保留 Release Manifest，关联构建物校验和、数据备份/迁移、配置变量名、验证证据和回滚路径。
 
-每个关键事实都应标明 `EXPLICIT`、`INFERRED` 或 `UNKNOWN`；交付状态只使用 `PLANNED`、`CREATED`、`OBSERVED`、`VERIFIED`、`BLOCKED`。没有真实执行证据时，不把设计稿、配置或推测写成 `VERIFIED`。
+关键事实注明 `EXPLICIT / INFERRED / UNKNOWN`。任务使用 `TODO / IN_PROGRESS / IMPLEMENTED / ACCEPTED / BLOCKED`，验收使用 `NOT_RUN / PASS / FAIL / STALE / BLOCKED`；能力和证据类型独立记录，字段以 [交付记录](haonan-s000-pmp/references/delivery-ledger.md) 为准。开发记录引用当前状态，缺少真实证据时保持未验收。
 
 ## 目录与校验
 

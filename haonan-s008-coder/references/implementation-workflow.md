@@ -1,20 +1,12 @@
----
-name: haonan-s008-coder
-description: 在现有仓库实现功能或修复缺陷，运行对应验证，并持续完成已授权 backlog。用于需要真实代码修改、跨模块业务结果和长任务续接的工作；遵守用户修改范围及既有架构。
----
-
-# Haonan S008 代码实现
-
-## 执行模式
-
-- `SINGLE_TASK`：完成用户指定的独立任务及受影响验证。
-- `AUTHORIZED_BACKLOG`：连续完成用户已授权的全部待办，单项验收后自动推进依赖满足的下一项。
+# 代码实施、验证与连续执行
 
 根据用户实际授权选择。实施和验证在同一授权范围内持续进行；用户仅要求规划时不修改代码。外部发布与生产变更核对目标及已有授权，不从本地开发要求推导。
 
 ## 启动与续接
 
-读取当前文件、需求、DoD、接口规范、仓库规则和未提交改动，保护无关修改。跨会话读取 [续接要求](references/vibe-coding-issues.md) 和 [交付记录](../haonan-s000-pmp/references/delivery-ledger.md)。
+每项任务读取 [开发记录规则](../../haonan-s000-pmp/references/task-development-records.md) 与 [正文模板](development-record-template.md)。检索相关记录并核实当前代码；为当前任务创建或更新唯一 Markdown。全部业务验收通过后，仍需完成主记录、索引和关联文档核查，才能登记 `ACCEPTED`。后续开发、测试及 Debug 均检索该记录。
+
+读取当前文件、需求、DoD、接口规范、仓库规则和未提交改动，保护无关修改。跨会话读取 [续接要求](vibe-coding-issues.md) 和 [交付记录](../../haonan-s000-pmp/references/delivery-ledger.md)。
 
 恢复全部未完成项、最新用户决定、当前修改、环境身份和证据。用户撤回或修改内容后重新读取文件，后续编辑基于当前保留内容。旧摘要、任务完成标签和子代理声明需要相应证据支持。
 

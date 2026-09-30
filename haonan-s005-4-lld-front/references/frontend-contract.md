@@ -46,3 +46,7 @@ condition,user_message,preserved_state,primary_action,secondary_action,telemetry
 - 性能预算、分包、图片、缓存和弱网。
 - 单元、组件、接口、a11y、视觉回归和 E2E 分层。
 - 共享组件覆盖所有实际受影响页面及长内容、结果出现、弹层和滚动状态；视觉工具遵守用户限制。
+
+## 测试交接
+
+将路由、角色、页面状态、真实控件语义、API 及验收 ID 交给 S009，按 [浏览器测试](../../haonan-s009-test/references/browser-e2e.md) 确定定位与异步断言。设计资料描述预期控件；运行测试仍需核查当前 DOM。状态转换和共享组件变化时，列出全部实际调用页面、上下文切换与回归入口。

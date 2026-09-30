@@ -1,0 +1,65 @@
+PASS haonan-s000-pmp
+PASS haonan-s001-ceo-strategy
+PASS haonan-s002-prd
+PASS haonan-s003-1-prototype
+PASS haonan-s003-2-ui
+PASS haonan-s004-hld
+PASS haonan-s005-1-lld-data
+PASS haonan-s005-2-lld-back
+PASS haonan-s005-3-lld-agent
+PASS haonan-s005-4-lld-front
+PASS haonan-s006-review
+PASS haonan-s007-planner
+PASS haonan-s008-coder
+PASS haonan-s009-test
+PASS haonan-s010-safety
+PASS haonan-s011-devops
+PASS haonan-s012-docs
+{
+  "skills_validated": 17,
+  "local_links_verified": 184,
+  "changed_files": [
+    "README.md",
+    "haonan-s000-pmp/SKILL.md",
+    "haonan-s000-pmp/references/codex-execution.md",
+    "haonan-s000-pmp/references/pipeline-contract.md",
+    "haonan-s001-ceo-strategy/SKILL.md",
+    "haonan-s002-prd/SKILL.md",
+    "haonan-s003-1-prototype/SKILL.md",
+    "haonan-s003-2-ui/SKILL.md",
+    "haonan-s004-hld/SKILL.md",
+    "haonan-s005-1-lld-data/SKILL.md",
+    "haonan-s005-2-lld-back/SKILL.md",
+    "haonan-s005-3-lld-agent/SKILL.md",
+    "haonan-s005-4-lld-front/SKILL.md",
+    "haonan-s006-review/SKILL.md",
+    "haonan-s007-planner/SKILL.md",
+    "haonan-s007-planner/references/task-template.md",
+    "haonan-s008-coder/SKILL.md",
+    "haonan-s008-coder/haoemr-experience.md",
+    "haonan-s009-test/SKILL.md",
+    "haonan-s009-test/references/test-matrix.md",
+    "haonan-s010-safety/SKILL.md",
+    "haonan-s011-devops/SKILL.md",
+    "haonan-s012-docs/SKILL.md",
+    "haonan-s012-docs/references/document-bundle.md"
+  ],
+  "added_files": [
+    "docs/development/TASK-20260930-001-s-series-records.md",
+    "docs/development/evidence/TASK-20260930-001-structure.txt",
+    "docs/development/index.md",
+    "haonan-s000-pmp/references/decision-register.md",
+    "haonan-s000-pmp/references/design-ownership.md",
+    "haonan-s000-pmp/references/task-development-records.md",
+    "haonan-s002-prd/references/organization-and-prototype.md",
+    "haonan-s006-review/references/change-review.md",
+    "haonan-s008-coder/references/development-record-template.md",
+    "haonan-s009-test/references/browser-e2e.md",
+    "haonan-s012-docs/references/project-knowledge.md"
+  ],
+  "preserved_original_files": true,
+  "preserved_professional_headings_and_fenced_templates": true,
+  "preserved_scripts_schemas_and_invocation_metadata": true,
+  "installed_verified": "/Users/liuhaoxian/.agents/skills",
+  "destination_verified": "/Users/liuhaoxian/Downloads/我的/Obsidian/刘浩南/haonan Skill/产品研发skill"
+}

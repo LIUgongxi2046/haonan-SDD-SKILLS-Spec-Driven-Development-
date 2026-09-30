@@ -43,3 +43,9 @@
 ```text
 profile,drivers,alternatives,rejected_reasons,cost_drivers,operational_owner,validation,status
 ```
+
+## 环境变化与知识维护
+
+发布和迁移记录关联源码版本、制品校验和、部署目标、数据库迁移版本、配置名称及生效证据、实际测试结果和受影响任务。秘密值保持在项目规定的秘密管理位置。
+
+配置、运行时、模型、数据库或发布目标变化时，重新核查相关证据的适用范围；仅对受影响验收标记待复验。按 [项目知识维护](../../haonan-s012-docs/references/project-knowledge.md) 更新运行说明、验证入口和关联开发记录。进程启动、构建成功、数据迁移完成及业务验收分别记录，不将不同阶段合并为已经发布成功。

@@ -1,0 +1,81 @@
+{
+  "skills_validated": 17,
+  "source_content_blocks_preserved": 308,
+  "coverage": {
+    "haonan-s000-pmp": {
+      "content_blocks_preserved": 21,
+      "reference": "haonan-s000-pmp/references/delivery-workflow.md"
+    },
+    "haonan-s001-ceo-strategy": {
+      "content_blocks_preserved": 14,
+      "reference": "haonan-s001-ceo-strategy/references/strategy-validation.md"
+    },
+    "haonan-s002-prd": {
+      "content_blocks_preserved": 18,
+      "reference": "haonan-s002-prd/references/requirements-validation.md"
+    },
+    "haonan-s003-1-prototype": {
+      "content_blocks_preserved": 17,
+      "reference": "haonan-s003-1-prototype/references/interaction-workflow.md"
+    },
+    "haonan-s003-2-ui": {
+      "content_blocks_preserved": 23,
+      "reference": "haonan-s003-2-ui/references/ui-workflow.md"
+    },
+    "haonan-s004-hld": {
+      "content_blocks_preserved": 14,
+      "reference": "haonan-s004-hld/references/architecture-workflow.md"
+    },
+    "haonan-s005-1-lld-data": {
+      "content_blocks_preserved": 14,
+      "reference": "haonan-s005-1-lld-data/references/data-lifecycle.md"
+    },
+    "haonan-s005-2-lld-back": {
+      "content_blocks_preserved": 15,
+      "reference": "haonan-s005-2-lld-back/references/service-behavior.md"
+    },
+    "haonan-s005-3-lld-agent": {
+      "content_blocks_preserved": 17,
+      "reference": "haonan-s005-3-lld-agent/references/runtime-governance.md"
+    },
+    "haonan-s005-4-lld-front": {
+      "content_blocks_preserved": 15,
+      "reference": "haonan-s005-4-lld-front/references/interaction-state.md"
+    },
+    "haonan-s006-review": {
+      "content_blocks_preserved": 16,
+      "reference": "haonan-s006-review/references/review-workflow.md"
+    },
+    "haonan-s007-planner": {
+      "content_blocks_preserved": 23,
+      "reference": "haonan-s007-planner/references/planning-workflow.md"
+    },
+    "haonan-s008-coder": {
+      "content_blocks_preserved": 29,
+      "reference": "haonan-s008-coder/references/implementation-workflow.md"
+    },
+    "haonan-s009-test": {
+      "content_blocks_preserved": 28,
+      "reference": "haonan-s009-test/references/acceptance-workflow.md"
+    },
+    "haonan-s010-safety": {
+      "content_blocks_preserved": 14,
+      "reference": "haonan-s010-safety/references/security-workflow.md"
+    },
+    "haonan-s011-devops": {
+      "content_blocks_preserved": 16,
+      "reference": "haonan-s011-devops/references/operations-workflow.md"
+    },
+    "haonan-s012-docs": {
+      "content_blocks_preserved": 14,
+      "reference": "haonan-s012-docs/references/documentation-workflow.md"
+    }
+  },
+  "local_links_verified": 219,
+  "original_professional_headings_and_templates_preserved": true,
+  "original_references_scripts_schemas_and_metadata_preserved": true,
+  "active_references_valid": true,
+  "installed_files_verified": 0,
+  "installed_verified": null,
+  "destination_verified": null
+}

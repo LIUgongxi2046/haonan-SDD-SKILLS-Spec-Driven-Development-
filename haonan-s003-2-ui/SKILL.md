@@ -5,7 +5,11 @@ description: 面向现有产品或新产品的整套高保真 UI 设计与交付
 
 ## Codex Adaptation
 
-执行前完整读取 [Codex 执行规则](../haonan-s000-pmp/references/codex-execution.md) 与 [HaoEMR 经验补充](haoemr-experience.md)。保留本文完整页面、状态、设计系统、资产、导出、规范和审计要求；视觉工具使用遵守用户限制。
+执行前完整读取 [Codex 执行规则](../haonan-s000-pmp/references/codex-execution.md) 与 [UI 设计实施与验收](references/ui-workflow.md)，核查范围、共享组件、实际产物和证据。保留本文完整页面、状态、设计系统、资产、导出、规范和审计要求；视觉工具使用遵守用户限制。
+
+- `DESIGN`：定义视觉系统、组件、页面及适用状态。
+- `AUDIT`：检查既有界面和资产，输出有依据的问题与未验证项。
+- `IMPLEMENT`：在用户已授权范围内修改界面并运行受影响验证。
 
 - 使用 `$haonan-s003-2-ui` 触发本技能。
 - 接受以下任一输入独立启动：代码/路由、PRD、原型/线框图/截图；Logo、IP、品牌规范和竞品参考属于增强输入，不是启动前提。
@@ -14,6 +18,8 @@ description: 面向现有产品或新产品的整套高保真 UI 设计与交付
 - 不声称页面、切图、构建或视觉验收完整，除非已实际执行相应盘点和验证。
 
 ## Skill Function
+
+界面更新前检索相关开发记录和当前设计规范。需要盘点现状时同时覆盖路由、Tab、弹窗、抽屉及角色可见状态，使用获准的 DOM 与行为检查；图像读取仍遵守用户限制。交互或业务规则变化使用 [需求同步](../haonan-s002-prd/references/organization-and-prototype.md)，Token 与组件维护位置使用 [设计责任](../haonan-s000-pmp/references/design-ownership.md)。
 
 - **阶段**：S003-2
 - **职能**：从产品全量盘点到高一致性 UI 设计、全状态设计、切图交付和质量验收。

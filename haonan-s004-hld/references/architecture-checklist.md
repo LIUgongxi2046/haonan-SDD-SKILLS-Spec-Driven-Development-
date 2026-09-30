@@ -32,3 +32,9 @@ ADR-ID,context,decision,options,tradeoffs,consequences,validation,status,owner
 ```
 
 状态建议：`PROPOSED`、`ACCEPTED`、`SUPERSEDED`、`REJECTED`。
+
+## 详细设计交接
+
+每项架构决定引用 [决策记录](../../haonan-s000-pmp/references/decision-register.md)，明确影响的 FR/NFR、接口或组件、接收设计技能及验证条件。ADR 生命周期与决定确认状态分别使用其原有字段；接受架构方案不能代替运行验证。
+
+依照 [设计维护责任](../../haonan-s000-pmp/references/design-ownership.md) 指定数据、后端、Agent 和前端规范的维护位置。共同字段或状态存在不同版本时，查证当前批准依据，更新实际受影响设计与任务，不能让后续执行者自行猜测采用哪个版本。

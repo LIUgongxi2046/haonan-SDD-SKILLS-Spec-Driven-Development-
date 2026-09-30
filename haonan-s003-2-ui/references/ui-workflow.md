@@ -1,15 +1,6 @@
----
-name: haonan-s003-2-ui
-description: 高保真界面、组件状态、视觉资产和界面质量审查。用于新界面设计、复用既有风格的局部优化、共享组件调整及完整页面状态覆盖，按用户要求选择产物和验证方式。
----
+# UI 设计实施与验收流程
 
-# Haonan S003-2 UI 设计与验证
-
-## 模式
-
-- `DESIGN`：定义视觉系统、组件、页面及适用状态。
-- `AUDIT`：检查既有界面和资产，输出有依据的问题与未验证项。
-- `IMPLEMENT`：在用户已授权范围内修改界面并运行受影响验证。
+本文中的脚本路径以本 skill 根目录为准。
 
 新视觉方向、已有界面复用和局部修复分别识别。已有批准方案时继承；单页修改不追加菜单或全局设计。只读审查不要求生成新资产或新页面。
 
@@ -19,11 +10,11 @@ description: 高保真界面、组件状态、视觉资产和界面质量审查�
 
 按需要读取：
 
-- [输入与目标依据](references/prd-and-prototype-inputs.md)：处理 PRD、原型、现有代码及冲突。
-- [页面和状态覆盖](references/coverage-and-states.md)：盘点实际修改范围与完整验收。
-- [视觉系统](references/visual-system.md)：定义或维护 Token、组件及资产一致性。
-- [交付规则](references/delivery-and-slicing.md)：确定产物与来源清单。
-- [质量检查](references/qa-checklist.md)：执行或审查界面验收。
+- [输入与目标依据](prd-and-prototype-inputs.md)：处理 PRD、原型、现有代码及冲突。
+- [页面和状态覆盖](coverage-and-states.md)：盘点实际修改范围与完整验收。
+- [视觉系统](visual-system.md)：定义或维护 Token、组件及资产一致性。
+- [交付规则](delivery-and-slicing.md)：确定产物与来源清单。
+- [质量检查](qa-checklist.md)：执行或审查界面验收。
 
 ## 设计与实施
 
@@ -46,4 +37,4 @@ description: 高保真界面、组件状态、视觉资产和界面质量审查�
 
 按所选模式交付设计、实际修改或审查记录，附页面与状态分母、资产来源、检查结果和未验证项。完整设计保留 Token、组件、状态和资产；局部任务引用现有规范与实际变更，避免无关重复产物。
 
-向 S005-4/S007 传递范围、组件和动态状态要求，向 S009 提供受影响页面及行为检查。状态遵循 [交付记录](../haonan-s000-pmp/references/delivery-ledger.md)，页面存在和校验器通过不能替代完整 UI 验收。
+向 S005-4/S007 传递范围、组件和动态状态要求，向 S009 提供受影响页面及行为检查。状态遵循 [交付记录](../../haonan-s000-pmp/references/delivery-ledger.md)，页面存在和校验器通过不能替代完整 UI 验收。
